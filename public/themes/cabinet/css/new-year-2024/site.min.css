@@ -1,0 +1,427 @@
+.new-year-2024-timer {
+    direction: ltr;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 50px 50px 50px 50px
+}
+
+.new-year-2024-timer__nums {
+    display: grid;
+    gap: 2px;
+    grid-template-columns: 1fr 1fr
+}
+
+.new-year-2024-timer__num {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: 600;
+    justify-content: center;
+    padding: 2px 0
+}
+
+.new-year-2024-timer__text {
+    font-size: 10px;
+    margin-top: 4px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    white-space: nowrap
+}
+
+.new-year-2024-banner {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background: #faf6d6;
+    background: -webkit-gradient(linear, left top, right top, from(#faf6d6), to(#c29339));
+    background: linear-gradient(90deg, #faf6d6, #c29339);
+    border-radius: 20px;
+    margin-bottom: 60px;
+    overflow: hidden;
+    padding: 2px;
+    position: relative
+}
+
+.new-year-2024-banner img {
+    display: block;
+    max-width: 100%
+}
+
+.new-year-2024-banner__bg {
+    background-position: 0 0;
+    background-size: cover;
+    border-radius: 20px;
+    bottom: 2px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none
+}
+
+.ar-lang .new-year-2024-banner__bg,
+.fa-lang .new-year-2024-banner__bg {
+    left: 2px;
+    right: 190px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1)
+}
+
+body:not(.ar-lang):not(.fa-lang) .new-year-2024-banner__bg {
+    left: 190px;
+    right: 2px
+}
+
+.new-year-2024-banner__in {
+    background-color: #002739;
+    border-radius: 20px;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 190px 1fr 234px;
+    position: relative;
+    z-index: 1
+}
+
+.new-year-2024-banner__start {
+    overflow: hidden
+}
+
+.ar-lang .new-year-2024-banner__start,
+.fa-lang .new-year-2024-banner__start {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1)
+}
+
+body:not(.ar-lang):not(.fa-lang) .new-year-2024-banner__start {
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px
+}
+
+.new-year-2024-banner__center {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center
+}
+
+.new-year-2024-banner__title {
+    color: #fbf6cc;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 10px
+}
+
+.new-year-2024-banner__text {
+    color: #fbf6cc;
+    font-size: 18px
+}
+
+.new-year-2024-banner__end {
+    display: grid;
+    -webkit-box-align: center;
+    align-items: center
+}
+
+.new-year-2024-banner__timer-start {
+    color: #fbf6cc;
+    font-size: 18px;
+    margin-bottom: 12px;
+    text-align: center
+}
+
+.new-year-2024-banner__btn-wrap {
+    text-align: right
+}
+
+.new-year-2024-banner .new-year-2024-timer__num {
+    background-color: #093346;
+    color: #fbf6cc
+}
+
+.new-year-2024-banner .new-year-2024-timer__text {
+    color: #fbf6cc
+}
+
+.new-year-2024-banner .mob {
+    display: none
+}
+
+.ar-lang .new-year-2024-banner,
+.fa-lang .new-year-2024-banner {
+    direction: rtl
+}
+
+.new-year-2024-banner__center,
+.new-year-2024-banner__end,
+.new-year-2024-banner__start {
+    position: relative;
+    z-index: 1
+}
+
+@media screen and (min-width:1010px) {
+    .ar-lang .new-year-2024-banner__in,
+    .fa-lang .new-year-2024-banner__in {
+        padding-left: 40px
+    }
+    body:not(.ar-lang):not(.fa-lang) .new-year-2024-banner__in {
+        padding-right: 40px
+    }
+}
+
+@media screen and (max-width:1010px) {
+    .new-year-2024-banner .pc {
+        display: none
+    }
+    .new-year-2024-banner .mob {
+        display: block
+    }
+    .new-year-2024-banner .new-year-2024-timer {
+        -webkit-box-pack: center;
+        justify-content: center
+    }
+    .new-year-2024-banner__bg {
+        display: none
+    }
+    .new-year-2024-banner__end {
+        padding-left: 12px;
+        padding-right: 12px
+    }
+    .new-year-2024-banner__title {
+        font-size: 22px;
+        margin-bottom: 26px
+    }
+    .new-year-2024-banner__text {
+        font-size: 16px;
+        line-height: 20px
+    }
+    .new-year-2024-banner__center {
+        margin-bottom: 10px;
+        text-align: center
+    }
+    .new-year-2024-banner__start {
+        z-index: 0;
+        -webkit-box-ordinal-group: 4;
+        border-radius: 0;
+        order: 3
+    }
+    .new-year-2024-banner__start img {
+        margin: 0 auto;
+        width: 256px
+    }
+    .new-year-2024-banner__in {
+        grid-template-columns: 1fr;
+        padding: 24px 12px 0
+    }
+    .new-year-2024-banner__btn-wrap {
+        text-align: center
+    }
+}
+
+@media screen and (max-width:480px) {
+    .new-year-2024-banner__title {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 280px
+    }
+}
+
+.section.header .new-year-2024-header-btn {
+    margin-left: 16px
+}
+
+.section.header .new-year-2024-header-btn img {
+    display: block
+}
+
+.section.header .new-year-2024-header-btn:hover {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: tada;
+    animation-name: tada
+}
+
+html[dir=rtl] .section.header .new-year-2024-header-btn {
+    margin-left: unset;
+    margin-right: 16px
+}
+
+@media screen and (max-width:360px) {
+    html[dir=rtl] .section.header .new-year-2024-header-btn {
+        margin-left: unset;
+        margin-right: 6px
+    }
+}
+
+@media screen and (max-width:340px) {
+    .section.header .new-year-2024-header-btn {
+        margin-left: 6px
+    }
+}
+
+.section.header.header_dark .new-year-2024-header-btn {
+    display: none
+}
+
+@-webkit-keyframes new-year-2024-header-btn-tada {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+    10%,
+    20% {
+        -webkit-transform: scale(.9) rotate(-3deg);
+        transform: scale(.9) rotate(-3deg)
+    }
+    30%,
+    50%,
+    70%,
+    90% {
+        -webkit-transform: scale(1.1) rotate(3deg);
+        transform: scale(1.1) rotate(3deg)
+    }
+    40%,
+    60%,
+    80% {
+        -webkit-transform: scale(1.1) rotate(-3deg);
+        transform: scale(1.1) rotate(-3deg)
+    }
+    to {
+        -webkit-transform: scale(1) rotate(0);
+        transform: scale(1) rotate(0)
+    }
+}
+
+@keyframes new-year-2024-header-btn-tada {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+    10%,
+    20% {
+        -webkit-transform: scale(.9) rotate(-3deg);
+        transform: scale(.9) rotate(-3deg)
+    }
+    30%,
+    50%,
+    70%,
+    90% {
+        -webkit-transform: scale(1.1) rotate(3deg);
+        transform: scale(1.1) rotate(3deg)
+    }
+    40%,
+    60%,
+    80% {
+        -webkit-transform: scale(1.1) rotate(-3deg);
+        transform: scale(1.1) rotate(-3deg)
+    }
+    to {
+        -webkit-transform: scale(1) rotate(0);
+        transform: scale(1) rotate(0)
+    }
+}
+
+.new-year-2024-btn {
+    border-radius: 10px;
+    display: inline-block;
+    padding: 1px;
+    text-decoration: none;
+    -webkit-transition: -webkit-box-shadow .3s;
+    transition: -webkit-box-shadow .3s;
+    transition: box-shadow .3s;
+    transition: box-shadow .3s, -webkit-box-shadow .3s
+}
+
+.new-year-2024-btn svg {
+    display: block
+}
+
+.new-year-2024-btn__in {
+    display: -webkit-box;
+    display: flex;
+    position: relative;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    border-radius: 10px;
+    justify-content: center;
+    -webkit-transition: all .3s;
+    transition: all .3s
+}
+
+.new-year-2024-btn__in:after {
+    border-radius: 10px;
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+    width: 100%
+}
+
+.new-year-2024-btn__icon {
+    margin-right: 10px
+}
+
+.new-year-2024-btn__text {
+    font-weight: 600;
+    letter-spacing: .48px
+}
+
+.new-year-2024-btn:hover .new-year-2024-btn__in:after {
+    opacity: 1
+}
+
+.new-year-2024-btn__icon,
+.new-year-2024-btn__text {
+    position: relative;
+    z-index: 1
+}
+
+.new-year-2024-btn {
+    background: -webkit-gradient(linear, left top, left bottom, from(#f0e3c3), to(#f0d78d));
+    background: linear-gradient(180deg, #f0e3c3, #f0d78d);
+    color: #002739
+}
+
+.new-year-2024-btn__in {
+    background: linear-gradient(215deg, #c49337 10.58%, #fcf7cd 60.01%, #edcd78 99.55%);
+    padding: 14px 20px
+}
+
+.new-year-2024-btn__in:after {
+    background: #fff
+}
+
+.new-year-2024-btn__text {
+    text-transform: uppercase
+}
+
+.new-year-2024-btn:hover {
+    background: hsla(0, 0%, 100%, .53);
+    -webkit-box-shadow: 0 0 40px 0 hsla(40, 83%, 82%, .4);
+    box-shadow: 0 0 40px 0 hsla(40, 83%, 82%, .4)
+}
+
+.new-year-2024-btn__icon,
+.new-year-2024-btn__text {
+    color: #002739
+}
+
+/*# sourceMappingURL=site.min.css.map*/
