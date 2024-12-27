@@ -14,8 +14,8 @@ class FlutterwavePaymentController extends Controller
 
     public function initiatePayment(Request $request)
     {
-        // Generate a transaction reference
-        $transactionRef = time();
+        // Generate a unique transaction reference as a string
+        $transactionRef = 'TX_' . uniqid();
 
         // Prepare the data for the Flutterwave API
         $paymentData = [
