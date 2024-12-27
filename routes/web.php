@@ -169,3 +169,8 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+
+//flutter wave payment integration
+Route::get('/flutterwave/pay', [App\Http\Controllers\FlutterwavePaymentController::class, 'index'])->name('flutterwave.index');
+Route::post('/flutterwave/pay', [App\Http\Controllers\FlutterwavePaymentController::class, 'initiatePayment'])->name('flutterwave.pay');
+Route::get('/flutterwave/callback', [App\Http\Controllers\FlutterwavePaymentController::class, 'handleCallback'])->name('flutterwave.callback');
