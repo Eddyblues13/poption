@@ -153,22 +153,26 @@
                             <i class="fas fa-arrow-left"></i> Back
                         </button>
                     </div>
-                    <form>
+                    @php
+                    $currencySymbol = $currencyMap[$currencyCode] ?? $currencyCode; // Get symbol or fallback to code
+                    @endphp
+
+                    <form method="POST" action="{{ route('payment.initiate') }}">
                         <div class="d-flex align-items-center mb-4">
                             <img src="assets/img/icon.webp" alt="Bank" class="me-3" style="width: 110px; height: 50px;">
                             <div>
-                                <h5 class="mb-1 text-white">Bank Transfer (NGN)</h5>
+                                <h5 class="mb-1 text-white">Bank Transfer ({{ $currencyCode }})</h5>
                                 <small class="text-secondary">
                                     Commission: 0%<br>
-                                    Minimum deposit amount: ₦7,740<br>
-                                    Max. amount per transaction: ₦900,000<br>
+                                    Minimum deposit amount: {{ $currencySymbol }}7,740<br>
+                                    Max. amount per transaction: {{ $currencySymbol }}900,000<br>
                                     Processing time: ~10 min.
                                 </small>
                             </div>
                         </div>
                         <div class="mb-4">
                             <label class="form-label text-light">Amount:</label>
-                            <input type="text" class="input-dark w-100" value="15,500" required>
+                            <input type="text" class="input-dark w-100" value="{{ $amount }}" required>
                         </div>
 
                         <div class="mb-4">
@@ -187,13 +191,13 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <label class="form-label text-light">First name:</label>
+                            <label class="form-label text-light">Name:</label>
                             <input type="text" class="input-dark w-100" value="{{Auth::user()->name}}" required>
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label text-light">Last name:</label>
-                            <input type="text" class="input-dark w-100" required>
+                            <label class="form-label text-light">Email:</label>
+                            <input type="text" class="input-dark w-100" value="{{Auth::user()->email}}" required>
                         </div>
 
                         <div>
@@ -206,19 +210,21 @@
                                 <img src="assets/img/fifth.jpg" alt="Gift 5" class="gift-option">
                             </div>
                         </div>
-                    </form>
+
                 </div>
             </div>
 
             <div class="col-md-4 mt-5">
                 <div class="px-1">
                     <h6 class="mb-3 text-secondary">You receive:</h6>
-                    <h3 class="mb-3 text-light">₦15,500</h3>
-                    <p class="text-warning">+ 0 numbers for the New Year Celebration</p>
+                    <h3 class="mb-3 text-light">{{ $currencySymbol }}{{ number_format($amount, 2) }}</h3>
 
-                    <button class="btn-primary-custom py-1 px-1 mb-4">
-                        Continue and pay {{ $amount }}
+
+                    <button type="submit" class="btn-primary-custom py-1 px-1 mb-4">
+                        Continue and pay {{ $currencySymbol }}{{ number_format($amount, 2) }}
                     </button>
+
+                    </form>
 
                     <h6 class="mb-3 text-light">Do you have questions or need help with account top-up?</h6>
                     <a href="#" class="text-info d-block mb-2">View our User Guide</a>

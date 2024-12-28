@@ -344,12 +344,9 @@
                             <div class="mb-block__in">
                                 <div class="mb-block__title">How it works</div>
                                 <ul>
-                                    <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/cabinet/try-demo/">Free demo</a></li>
-                                    <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/quick-start/">Quick start</a></li>
-                                    <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/cabinet/try-demo/">Education</a></li>
+                                    <li><a class="mb-block__link" href="{{ route('register') }}">Free demo</a></li>
+                                    <li><a class="mb-block__link" href="{{ route('register') }}">Quick start</a></li>
+                                    <li><a class="mb-block__link" href="{{ route('register') }}">Education</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -363,8 +360,7 @@
                                     <li><a class="mb-block__link"
                                             href="https://m.pocketoption.com/en/payment-methods/">Instant Deposits and
                                             Withdrawals</a></li>
-                                    <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/cabinet/try-demo/">Promo & Bonuses</a>
+                                    <li><a class="mb-block__link" href="{{ route('register') }}">Promo & Bonuses</a>
                                     </li>
                                     <li><a class="mb-block__link" target="_blank"
                                             href="https://pocket-land.com/en/land/010-QT-01">Social Trading</a></li>
@@ -377,30 +373,30 @@
                             <div class="mb-block__in">
                                 <div class="mb-block__title">About us</div>
                                 <ul>
-                                    <li><a class="mb-block__link" href="https://m.pocketoption.com/en/about-us/">About
+                                    <li><a class="mb-block__link" href="#">About
                                             the Company</a></li>
                                     <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/contacts/">Contacts</a></li>
+                                            href="#">Contacts</a></li>
                                     <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/reviews/">Reviews</a></li>
+                                            href="#">Reviews</a></li>
                                     <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/cabinet/support/">Support Service</a>
+                                            href="#">Support Service</a>
                                     </li>
                                     <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/about-us/regulatory-environment/">Regulation</a>
+                                            href="#">Regulation</a>
                                     </li>
                                     <li><a class="mb-block__link" target="_blank"
-                                            href="https://m.pocketoption.com/en/public-offer/">Terms and Conditions</a>
+                                            href="#">Terms and Conditions</a>
                                     </li>
-                                    <li><a class="mb-block__link" href="https://m.pocketoption.com/en/aml-policy/">AML
+                                    <li><a class="mb-block__link" href="#">AML
                                             and KYC policy</a></li>
                                     <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/pdf/po_trade/po_privacy_en.pdf">Privacy
+                                            href="#">Privacy
                                             policy</a></li>
                                     <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/payment-policy/">Payment policy</a></li>
+                                            href="#">Payment policy</a></li>
                                     <li><a class="mb-block__link"
-                                            href="https://m.pocketoption.com/en/responsibility-disclosure/">Information
+                                            href="#">Information
                                             disclosure</a></li>
                                 </ul>
                             </div>
@@ -469,8 +465,7 @@
                                     </li>
                                     <li>
                                         <a class="mb-block__link mb-block__link_web js-android-link1"
-                                            href="https://m.pocketoption.com/en/cabinet/try-demo/" data-name="svg-link"
-                                            target="_blank"
+                                            href="{{ route('register') }}" data-name="svg-link" target="_blank"
                                             data-layout='{"event":"gtm_events","ga4_event_name":"go_to_store_from_menu","store_name":"web"}'>
                                             <svg class="svg-icon web" viewBox="0 0 64 64" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -666,10 +661,10 @@
                     <div class="header__menu">
                         <ul>
                             <li>
-                                <a href="https://m.pocketoption.com/en/quick-start/">Quick start</a>
+                                <a href="{{ route('register') }}">Quick start</a>
                             </li>
                             <li>
-                                <a href="https://m.pocketoption.com/en/cabinet/try-demo/">Free demo</a>
+                                <a href="{{ route('register') }}">Free demo</a>
                             </li>
                             <li>
                                 <a href="https://m.pocketoption.com/en/about-us/">About us</a>
@@ -1095,7 +1090,7 @@
                                     <a href="{{route('login')}}">
                                         Log In </a>
                                     <div class="dvdr">or</div>
-                                    <a href="https://m.pocketoption.com/en/cabinet/try-demo/">
+                                    <a href="{{ route('register') }}">
                                         Start in one click </a>
                                 </div>
                             </div>
@@ -1189,7 +1184,7 @@
                             </li>
                             <li class="why-list__item">
                                 <a class="why-list__link why-list__link--diverse-trading-instruments"
-                                    href="https://m.pocketoption.com/en/cabinet/try-demo/">
+                                    href="{{ route('register') }}">
                                     <img src="themes/2017-09/img/why-we/3.svg" alt="Icon 3" class="lazy"
                                         loading="lazy" />
                                     <p class="why-list__title">Diverse Trading Instruments</p>
@@ -1198,8 +1193,7 @@
                                 </a>
                             </li>
                             <li class="why-list__item">
-                                <a class="why-list__link why-list__link--demo-account"
-                                    href="https://m.pocketoption.com/en/cabinet/try-demo/">
+                                <a class="why-list__link why-list__link--demo-account" href="{{ route('register') }}">
                                     <img src="themes/2017-09/img/why-we/4.svg" alt="Icon 4" class="lazy"
                                         loading="lazy" />
                                     <p class="why-list__title">Demo Account</p>
@@ -1251,8 +1245,7 @@
                                 <div class="start-trading__inn">
                                     <p class="start-trading__text">
                                         Trade in one click </p>
-                                    <a href="https://m.pocketoption.com/en/cabinet/try-demo/"
-                                        class="btn btn_blue-gradient">Start trading</a>
+                                    <a href="{{ route('register') }}" class="btn btn_blue-gradient">Start trading</a>
                                 </div>
                             </li>
                         </ul>
@@ -1420,7 +1413,7 @@
                                     <div class="btn btn_dark-blue offers__btn">More</div>
                                 </div>
                             </a>
-                            <a href="https://m.pocketoption.com/en/reviews/" target="_blank"
+                            <a href="#" target="_blank"
                                 class="offers__item offers__item_why">
                                 <div class="offers__col">
                                     <div class="offers__img-wrap">
@@ -1602,7 +1595,7 @@
                         <div class="check-your-luck__right">
                             <div class="alert alert--danger"></div>
                             <div class="form-wrap">
-                                <form action="https://m.pocketoption.com/en/check-your-luck/" method="post"
+                                <form action="#" method="post"
                                     class="js-check-your-luck-form">
                                     <input type="email" name="email" placeholder="Enter your email" />
                                     <button type="submit" class="btn btn_blue-gradient">
@@ -1734,7 +1727,7 @@
                                 </a>
                             </li>
                             <li class="devices__item">
-                                <a href="https://m.pocketoption.com/en/cabinet/try-demo/" target="_blank"
+                                <a href="{{ route('register') }}" target="_blank"
                                     class="devices__btn devices__btn_ios js-web-link" data-name="svg-link"
                                     data-layout='{"event":"gtm_events","ga4_event_name":"go_to_store_from_main","store_name":"web"}'>
                                     <div class="devices__top">
@@ -2666,13 +2659,13 @@
                             </div>
                             <div class="slider__right">
                                 <div class="slider__footer slider-footer">
-                                    <a href="https://m.pocketoption.com/en/reviews/"
+                                    <a href="#"
                                         class="slider-footer__link-all slider__link-all">All reviews</a>
                                     <p class="slider-footer__text">
                                         Your feedback helps us to improve our platform and provide you with the best
                                         trading experience tailored to your needs. View ratings and post your own
                                         suggestions. We appreciate your feedback! </p>
-                                    <a href="https://m.pocketoption.com/en/reviews/"
+                                    <a href="#"
                                         class="btn btn_light-blue slider-footer__btn">
                                         Submit a review </a>
                                     <div class="slider__info-text slider-footer__desc">
@@ -3140,18 +3133,18 @@
 
                     <ul class="footer-nav">
                         <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="https://m.pocketoption.com/en/contacts/">Contacts</a></li>
+                                href="#">Contacts</a></li>
                         <li class="footer-nav__item"><a class="footer-nav__link" target="_blank"
-                                href="https://m.pocketoption.com/en/public-offer/">Terms and Conditions</a></li>
+                                href="#">Terms and Conditions</a></li>
                         <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="https://m.pocketoption.com/en/aml-policy/">AML and KYC policy</a></li>
+                                href="#">AML and KYC policy</a></li>
                         <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="https://m.pocketoption.com/pdf/po_trade/po_privacy_en.pdf" target="_blank">Privacy
+                                href="#" target="_blank">Privacy
                                 policy</a></li>
                         <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="https://m.pocketoption.com/en/payment-policy/">Payment policy</a></li>
+                                href="#">Payment policy</a></li>
                         <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="https://m.pocketoption.com/en/about-us/regulatory-environment/">Regulatory
+                                href="#">Regulatory
                                 Environment</a></li>
                         <li class="footer-nav__item"><a class="footer-nav__link"
                                 href="https://m.pocketoption.com/en/one-click-payment-policy/">One-Click Payment
@@ -3249,7 +3242,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 I have read and accepted the following agreement: <a
-                                                    href="https://m.pocketoption.com/en/public-offer/"
+                                                    href="#"
                                                     target="_blank">Public offer agreement</a>
                                                 <input type="checkbox" name="rules" value="1" id="checkbox_pao"
                                                     required="1" /> <span class="checkmark"></span>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Trade;
 use Illuminate\Http\Request;
+use App\Models\AccountBalance;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -18,6 +19,14 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+
+
+    public function welcome()
+    {
+        return view('account.welcome');
+    }
+
+
     /**
      * Show the application dashboard.
      *
@@ -25,7 +34,46 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('account.home');
+        // Sum of account balance
+        $data['balance_sum'] = AccountBalance::where('user_id', Auth::user()->id)
+            ->sum('amount');
+        return view('account.home', $data);
+    }
+
+
+    public function saveCurrency(Request $request)
+    {
+        // Validate the request data to ensure currency is provided
+        $request->validate([
+            'currency' => 'required|string'
+        ]);
+
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Save the selected currency to the user's profile in the database
+        $user->currency = $request->currency;
+        $user->save();
+
+        // Respond with JSON indicating success
+        return response()->json(['success' => true]);
+    }
+
+    // Save the selected country to session
+    public function saveCountry(Request $request)
+    {
+        $request->validate([
+            'country' => 'required|string'
+        ]);
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Save the selected currency to the user's profile in the database
+        $user->country = $request->country;
+        $user->save();
+
+        // Respond with JSON indicating success
+        return response()->json(['success' => true]);
     }
 
 
@@ -113,12 +161,183 @@ class HomeController extends Controller
         // Retrieve amount from session or query
         $amount = session('amount') ?? $request->query('amount');
 
+        // Full mapping of world currency codes to symbols
+        $currencyMap = [
+            'AED' => 'د.إ',
+            'AFN' => '؋',
+            'ALL' => 'L',
+            'AMD' => '֏',
+            'ANG' => 'ƒ',
+            'AOA' => 'Kz',
+            'ARS' => '$',
+            'AUD' => '$',
+            'AWG' => 'ƒ',
+            'AZN' => '₼',
+            'BAM' => 'KM',
+            'BBD' => '$',
+            'BDT' => '৳',
+            'BGN' => 'лв',
+            'BHD' => '.د.ب',
+            'BIF' => 'FBu',
+            'BMD' => '$',
+            'BND' => '$',
+            'BOB' => 'Bs.',
+            'BRL' => 'R$',
+            'BSD' => '$',
+            'BTN' => 'Nu.',
+            'BWP' => 'P',
+            'BYN' => 'Br',
+            'BZD' => '$',
+            'CAD' => '$',
+            'CDF' => 'FC',
+            'CHF' => 'CHF',
+            'CLP' => '$',
+            'CNY' => '¥',
+            'COP' => '$',
+            'CRC' => '₡',
+            'CUP' => '$',
+            'CVE' => 'Esc',
+            'CZK' => 'Kč',
+            'DJF' => 'Fdj',
+            'DKK' => 'kr',
+            'DOP' => '$',
+            'DZD' => 'د.ج',
+            'EGP' => '£',
+            'ERN' => 'Nfk',
+            'ETB' => 'Br',
+            'EUR' => '€',
+            'FJD' => '$',
+            'FKP' => '£',
+            'FOK' => 'kr',
+            'GBP' => '£',
+            'GEL' => '₾',
+            'GGP' => '£',
+            'GHS' => '₵',
+            'GIP' => '£',
+            'GMD' => 'D',
+            'GNF' => 'FG',
+            'GTQ' => 'Q',
+            'GYD' => '$',
+            'HKD' => '$',
+            'HNL' => 'L',
+            'HRK' => 'kn',
+            'HTG' => 'G',
+            'HUF' => 'Ft',
+            'IDR' => 'Rp',
+            'ILS' => '₪',
+            'IMP' => '£',
+            'INR' => '₹',
+            'IQD' => 'ع.د',
+            'IRR' => '﷼',
+            'ISK' => 'kr',
+            'JEP' => '£',
+            'JMD' => '$',
+            'JOD' => 'د.ا',
+            'JPY' => '¥',
+            'KES' => 'KSh',
+            'KGS' => 'с',
+            'KHR' => '៛',
+            'KID' => '$',
+            'KMF' => 'CF',
+            'KRW' => '₩',
+            'KWD' => 'د.ك',
+            'KYD' => '$',
+            'KZT' => '₸',
+            'LAK' => '₭',
+            'LBP' => 'ل.ل',
+            'LKR' => 'Rs',
+            'LRD' => '$',
+            'LSL' => 'L',
+            'LYD' => 'ل.د',
+            'MAD' => 'د.م.',
+            'MDL' => 'L',
+            'MGA' => 'Ar',
+            'MKD' => 'ден',
+            'MMK' => 'K',
+            'MNT' => '₮',
+            'MOP' => 'MOP$',
+            'MRU' => 'UM',
+            'MUR' => '₨',
+            'MVR' => '.ރ',
+            'MWK' => 'MK',
+            'MXN' => '$',
+            'MYR' => 'RM',
+            'MZN' => 'MT',
+            'NAD' => '$',
+            'NGN' => '₦',
+            'NIO' => 'C$',
+            'NOK' => 'kr',
+            'NPR' => '₨',
+            'NZD' => '$',
+            'OMR' => 'ر.ع.',
+            'PAB' => 'B/.',
+            'PEN' => 'S/',
+            'PGK' => 'K',
+            'PHP' => '₱',
+            'PKR' => '₨',
+            'PLN' => 'zł',
+            'PYG' => '₲',
+            'QAR' => 'ر.ق',
+            'RON' => 'lei',
+            'RSD' => 'дин.',
+            'RUB' => '₽',
+            'RWF' => 'FRw',
+            'SAR' => '﷼',
+            'SBD' => '$',
+            'SCR' => '₨',
+            'SDG' => 'ج.س.',
+            'SEK' => 'kr',
+            'SGD' => '$',
+            'SHP' => '£',
+            'SLE' => 'Le',
+            'SLL' => 'Le',
+            'SOS' => 'Sh',
+            'SRD' => '$',
+            'SSP' => '£',
+            'STN' => 'Db',
+            'SYP' => '£',
+            'SZL' => 'L',
+            'THB' => '฿',
+            'TJS' => 'ЅМ',
+            'TMT' => 'm',
+            'TND' => 'د.ت',
+            'TOP' => 'T$',
+            'TRY' => '₺',
+            'TTD' => '$',
+            'TVD' => '$',
+            'TWD' => 'NT$',
+            'TZS' => 'TSh',
+            'UAH' => '₴',
+            'UGX' => 'USh',
+            'USD' => '$',
+            'UYU' => '$U',
+            'UZS' => 'сўм',
+            'VES' => 'Bs.',
+            'VND' => '₫',
+            'VUV' => 'VT',
+            'WST' => 'T',
+            'XAF' => 'FCFA',
+            'XCD' => '$',
+            'XOF' => 'CFA',
+            'XPF' => '₣',
+            'YER' => '﷼',
+            'ZAR' => 'R',
+            'ZMW' => 'ZK',
+            'ZWL' => '$'
+        ];
+
+        $currencyCode = Auth::user()->currency;
+
         // Render the bank deposit page with amount
         return view('account.deposit-bank', [
             'amount' => $amount,
-            'success' => session('success')
+            'success' => session('success'),
+            'currencyMap' => $currencyMap,
+            'currencyCode' => $currencyCode,
         ]);
     }
+
+
 
     // Method to handle crypto deposits
     public function cryptoDeposit(Request $request)
@@ -135,5 +354,15 @@ class HomeController extends Controller
             'walletAddress' => $walletAddress,
             'success' => session('success')
         ]);
+    }
+
+
+    public function UserLogout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')->with('status', 'You have been logged out successfully.');
     }
 }

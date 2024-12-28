@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TransactionNotificationMail;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -30,11 +31,10 @@ class AdminController extends Controller
 
     public function index()
     {
-        $data['users'] = User::select('users.id', 'users.username', 'users.name', 'users.email', 'users.created_at')
+        $data['users'] = User::select('users.id', 'users.name', 'users.email', 'users.created_at')
             ->leftJoin('account_balances', 'users.id', '=', 'account_balances.user_id')
-            ->leftJoin('profits', 'users.id', '=', 'profits.user_id')
-            ->groupBy('users.id', 'users.username', 'users.name', 'users.email', 'users.created_at')
-            ->selectRaw('SUM(account_balances.amount) as balance_sum, SUM(profits.amount) as profit_sum')
+            ->groupBy('users.id', 'users.name', 'users.email', 'users.created_at')
+            ->selectRaw('SUM(account_balances.amount) as balance_sum')
             ->get();
         // Sum of account balance
         $data['balance_sum'] = AccountBalance::sum('amount');
@@ -42,16 +42,16 @@ class AdminController extends Controller
 
 
         // Sum of pending deposits
-        $data['pending_deposits_sum'] = Deposit::where('status', 'pending')->sum('amount');
+        $data['pending_deposits_sum'] = Payment::where('status', 'pending')->sum('amount');
 
         // Sum of successful deposits
-        $data['total_deposits'] = Deposit::sum('amount');
+        $data['total_deposits'] = Payment::sum('amount');
 
         // Sum of pending withdrawals
-        $data['pending_withdrawals_sum'] = Withdrawal::where('status', 'pending')->sum('amount');
+        $data['pending_withdrawals_sum'] = Payment::where('status', 'pending')->sum('amount');
 
         // Sum of successful withdrawals
-        $data['total_withdrawals'] = Withdrawal::sum('amount');
+        $data['total_withdrawals'] = Payment::sum('amount');
 
         // sum total users
         $data['total_users'] = User::count();
@@ -64,11 +64,10 @@ class AdminController extends Controller
 
     public function manageUsersPage()
     {
-        $data['users'] = User::select('users.id', 'users.username', 'users.name', 'users.email', 'users.created_at')
+        $data['users'] = User::select('users.id', 'users.name', 'users.email', 'users.created_at')
             ->leftJoin('account_balances', 'users.id', '=', 'account_balances.user_id')
-            ->leftJoin('profits', 'users.id', '=', 'profits.user_id')
-            ->groupBy('users.id', 'users.username', 'users.name', 'users.email', 'users.created_at')
-            ->selectRaw('SUM(account_balances.amount) as balance_sum, SUM(profits.amount) as profit_sum')
+            ->groupBy('users.id', 'users.name', 'users.email', 'users.created_at')
+            ->selectRaw('SUM(account_balances.amount) as balance_sum')
             ->get();
 
 
@@ -287,7 +286,7 @@ class AdminController extends Controller
         $subject = $request->subject;
 
         // Send the email using the SendUserEmail mailable
-        Mail::to($request->email)->send(new SendUserEmail($data, $subject));
+        //Mail::to($request->email)->send(new SendUserEmail($data, $subject));
 
         // Redirect back with a success message
         return back()->with('status', 'Email successfully sent!');
@@ -314,25 +313,25 @@ class AdminController extends Controller
         }
 
         // Fetch deposits for the user
-        $data['deposits'] = Deposit::where('user_id', $id)->get();
+        $data['deposits'] = Payment::where('user_id', $id)->get();
 
         // Sum of pending deposits
-        $data['pending_deposits_sum'] = Deposit::where('user_id', $id)
+        $data['pending_deposits_sum'] = Payment::where('user_id', $id)
             ->where('status', 'pending')
             ->sum('amount');
 
         // Sum of successful deposits
-        $data['successful_deposits_sum'] = Deposit::where('user_id', $id)
+        $data['successful_deposits_sum'] = Payment::where('user_id', $id)
             ->where('status', 'successful')
             ->sum('amount');
 
         // Sum of pending withdrawals
-        $data['pending_withdrawals_sum'] = Withdrawal::where('user_id', $id)
+        $data['pending_withdrawals_sum'] = Payment::where('user_id', $id)
             ->where('status', 'pending')
             ->sum('amount');
 
         // Sum of successful withdrawals
-        $data['successful_withdrawals_sum'] = Withdrawal::where('user_id', $id)
+        $data['successful_withdrawals_sum'] = Payment::where('user_id', $id)
             ->where('status', 'successful')
             ->sum('amount');
 
@@ -342,7 +341,7 @@ class AdminController extends Controller
 
 
         // Sum of profit
-        $data['profit_sum'] = Profit::where('user_id', $id)
+        $data['profit_sum'] = Payment::where('user_id', $id)
             ->sum('amount');
 
 

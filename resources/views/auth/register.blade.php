@@ -200,7 +200,7 @@
         <div class="wrapper__top">
             <header class="site-header">
                 <div class="login-container">
-                    <a class="site-header__back-btn" href="https://pocketoption.com/en/">To home page</a>
+                    <a class="site-header__back-btn" href="{{ url('/') }}">To home page</a>
                     <div class="site-header__end">
 
                         <div class="languages js-languages">
@@ -395,8 +395,8 @@
                         <!-- end brand -->
 
                         <div class="login-content">
-                            <p class="login-content__redirect">Already registered? <a
-                                    href="{{route('login')}}">Sign in</a>
+                            <p class="login-content__redirect">Already registered? <a href="{{route('login')}}">Sign
+                                    in</a>
                             </p>
                             <div class="ajax-message js-message"></div>
 

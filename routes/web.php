@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AdminLoginController;
 
@@ -18,6 +19,17 @@ Route::get('/bank-deposit', [App\Http\Controllers\HomeController::class, 'bankDe
 Route::get('/crypto-deposit', [App\Http\Controllers\HomeController::class, 'cryptoDeposit'])->name('crypto.deposit');
 Route::post('/make-deposit', [App\Http\Controllers\HomeController::class, 'depositPage'])->name('deposit.page');
 Route::get('/withdrawal', [App\Http\Controllers\HomeController::class, 'withdrawal'])->name('withdrawal');
+// Payment Routes
+
+Route::get('/tax', [PaymentController::class, 'showPaymentForm'])->name('tax.payment'); // Show payment form
+Route::post('/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate'); // Initiate payment
+Route::get('/callback', [PaymentController::class, 'paymentCallback'])->name('payment.callback'); // Handle payment callback
+
+Route::get('/testing', [App\Http\Controllers\HomeController::class, 'testing'])->name('testing');
+Route::get('/welcome', [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
+Route::post('/save-currency', [App\Http\Controllers\HomeController::class, 'saveCurrency'])->name('saveCurrency');
+Route::post('/saveCountry', [App\Http\Controllers\HomeController::class, 'saveCountry'])->name('saveCountry');
+Route::get('user/logout', [App\Http\Controllers\HomeController::class, 'UserLogout'])->name('user.logout');
 
 
 
@@ -168,6 +180,9 @@ Route::prefix('admin')->group(function () {
         Route::delete('/trades/{trade}', [TradeController::class, 'destroy'])->name('admin.trades.destroy');
     });
 });
+
+
+
 
 
 //flutter wave payment integration

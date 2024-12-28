@@ -121,6 +121,106 @@
         background-color: var(--dark-blue);
     }
 
+    .wallet-button {
+        background-color: #074f40;
+        background: linear-gradient(75deg, rgba(6, 201, 49, .35) 1.75%, rgba(6, 201, 49, 0) 34.25%);
+        border: 1px solid #047838;
+        color: #5aa86b;
+    }
+
+    .wallet-button:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .popup-form {
+        background-color: #1a1f2e;
+        color: white;
+        width: 320px;
+        border-radius: 8px;
+        padding: 20px;
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        z-index: 1000;
+        display: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 1px solid #343e52;
+    }
+
+    .dark-select option {
+        background-color: #1a1f2e !important;
+        font-size: 14px;
+    }
+
+
+    .dark-input,
+    .dark-select {
+        background-color: #162032 !important;
+        border-color: #44506a !important;
+        color: grey !important;
+    }
+
+    .dark-input:focus {
+        background-color: #162032 !important;
+        border-color: #44506a !important;
+        color: grey !important;
+        box-shadow: none !important;
+    }
+
+    .dark-select:focus {
+        background-color: #162032 !important;
+        /* border-color: #44506a !important; */
+        border: none;
+        color: grey !important;
+        box-shadow: none !important;
+
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: #6c757d;
+        font-size: 1.2rem;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        color: white;
+    }
+
+    .form-check-input {
+        background-color: transparent;
+        border-color: #2a2e39;
+    }
+
+    .form-check-input:checked {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    .submit-btn {
+        background-color: #172832;
+        border: 1px solid #047838;
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        color: white;
+        font-weight: 500;
+    }
+
+    .submit-btn:hover {
+        background-color: #047838;
+    }
+
+    .text-gray {
+        color: #6c757d;
+    }
+
+
+
+
     @media (max-width: 768px) {
         .trading-chart {
             height: calc(100vh - 350px);
@@ -143,16 +243,25 @@
     <header class="dark-bb">
 
         <nav class="navbar navbar-expand-lg">
-            <a class="nav-link" href="#" role="button" data-toggle="collapse" data-target="#sidebar"
+            <a class="nav-link px-3" href="#" role="button" data-toggle="collapse" data-target="#sidebar"
                 aria-expanded="false" aria-controls="sidebar">
+                {{-- <img src="assets/img/poplogo.png" width="30" height="30" alt="logo"
+                    class="img-fluid rounded-circle"> --}}
                 <button class="btn btn-outline-light btn-gradient">
-                    <img src="assets/img/2.pn" alt="logo" class="img-fluid">
+                    <img src="assets/img/2.png" width="30" height="30" alt="logo" class="img-fluid">
                 </button>
             </a>
 
             <!-- Sidebar -->
-            <div class="collapse" id="sidebar">
-                <div class="bg-dark p-4" style="width: 250px; height: 100vh;">
+            <div class="collapse" id="sideba">
+                <div class="bg-dark p-4" style="width: 250px; height: 50vh;">
+                    <!-- Avatar and User Info -->
+                    <div class="text-center py-2 border-bottom border-secondary">
+                        <img src="https://via.placeholder.com/100" alt="Default Avatar" class="rounded-circle mb-3"
+                            style="width: 30px; height: 30px; object-fit: cover; border: 2px solid #ffffff;">
+                        <h5 id="user-name" class="mb-0">John Doe</h5>
+                        <p id="user-email" class="text-muted small">johndoe@example.com</p>
+                    </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Home</a>
@@ -183,15 +292,102 @@
                 <ul class="navbar-nav ml-auto">
 
                     <li class="nav-item dropdown header-img-icon">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-primary">QT Real</span>
+                            <span class="badge bg-secondary">{{Auth::user()->currency}}</span>
+                            <span>{{$balance_sum}}</span>
+                            <span class="me-2">
+                                <button class="btn wallet-button" id="openPopupBtn"><i
+                                        class="bi bi-wallet2"></i></button>
+                            </span>
+                        </div>
 
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="badge bg-primary">QT Real</span>
-                                <span class="badge bg-secondary">NGN</span>
-                                <span>0</span>
+                        {{-- deposit popup form starts here --}}
+                        <div class="popup-overlay" id="popupOverlay"></div>
+                        <div class="popup-form" id="popupForm">
+                            <!-- Header -->
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h5 class="mb-1">Quick account top-up</h5>
+                                    <p class="text-light mb-0" style="font-size: 0.875rem;">Make a deposit to start
+                                        earning</p>
+                                </div>
+                                <button class="close-btn fs-4" id="closePopupBtn">&times;</button>
                             </div>
-                        </a>
+
+                            <!-- Form -->
+
+                            <form action="/make-deposit" method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <label class="text-light mb-2" style="font-size: 0.875rem;">Payment Method</label>
+                                    <select class="form-select dark-select" name="deposit_method" required>
+                                        <option value="bank_transfer" {{ old('deposit_method')=='bank_transfer'
+                                            ? 'selected' : '' }}>Bank Transfer</option>
+                                        <option value="bitcoin" {{ old('deposit_method')=='bitcoin' ? 'selected' : ''
+                                            }}>Bitcoin</option>
+                                        <option value="ethereum" {{ old('deposit_method')=='ethereum' ? 'selected' : ''
+                                            }}>Ethereum</option>
+                                        <option value="litecoin" {{ old('deposit_method')=='litecoin' ? 'selected' : ''
+                                            }}>Litecoin</option>
+                                        <option value="usdt" {{ old('deposit_method')=='usdt' ? 'selected' : '' }}>USDT
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="text-gray mb-2" style="font-size: 0.875rem;">Amount</label>
+                                    <input type="number" name="amount" class="form-control dark-input" id="amountInput"
+                                        required value="{{ old('amount') }}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="promoCheck">
+                                        <label class="form-check-label" for="promoCheck">
+                                            I have a promo code
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="submit-btn pop-submit-btn" id="submitBtn">Continue and pay
+                                    {{Auth::user()->currency}}0.00</button>
+                            </form>
+
+                            <script>
+                                //pop up form js codes
+
+                                const amountInput = document.getElementById('amountInput');
+                                const submitBtn = document.getElementById('submitBtn');
+                                const openPopupBtn = document.getElementById('openPopupBtn');
+                                const closePopupBtn = document.getElementById('closePopupBtn');
+                                const popupForm = document.getElementById('popupForm');
+
+                                // Update button text when amount changes
+                                amountInput.addEventListener('input', function() {
+                                    const amount = this.value ? parseInt(this.value).toLocaleString() : '0';
+                                    submitBtn.textContent = `Continue and pay {{Auth::user()->currency}}${amount}`;
+                                });
+
+                                // Open popup
+                                openPopupBtn.addEventListener('click', function() {
+                                    popupForm.style.display = 'block';
+                                });
+
+                                // Close popup
+                                closePopupBtn.addEventListener('click', function() {
+                                    popupForm.style.display = 'none';
+                                });
+
+                                // Prevent default page reload after form  submission
+                                const form = document.getElementById('topupForm');
+                                form.addEventListener('submit', function(e) {
+                                    e.preventDefault();
+                                });
+                            </script>
+                        </div>
+
+
                         <div class="dropdown-menu">
                             <div class="dropdown-header d-flex flex-column align-items-center">
                                 <div class="figure mb-3">
@@ -238,14 +434,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item dropdown header-img-icon">
-                        <!-- Refined "Make Deposit" Dropdown -->
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <button class="btn btn-outline-light btn-gradient">
-                                <i class="bi bi-wallet2"></i>
-                            </button>
-                        </a>
+                    {{-- <li class="nav-item dropdown header-img-icon">
                         <div class="dropdown-menu p-4" style="width: 500px; border-radius: 10px; background: #1c1f2c;">
                             <h4 class="text-white mb-3" style="font-family: 'Roboto', sans-serif; font-weight: 700;">
                                 Quick Account Top-up</h4>
@@ -315,10 +504,11 @@
                         
                                 // Initialize the button text on page load
                                 updateButtonText();
+                                
                             </script>
                         </div>
 
-                    </li>
+                    </li> --}}
 
 
                 </ul>
@@ -366,12 +556,12 @@
                             <!-- Time and Amount -->
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between mb-2">
-                                    <div class="time-amount-display">
-                                        <small class="d-block text-muted">Time</small>
+                                    <div class="time-amount-display me-2">
+                                        <small class="d-block text-secondary">Time</small>
                                         <strong>00:01:00</strong>
                                     </div>
                                     <div class="time-amount-display">
-                                        <small class="d-block text-muted">Amount</small>
+                                        <small class="d-block text-secondary">Amount</small>
                                         <input type="number" name="amount" class="form-control" value="1500" required>
                                     </div>
                                 </div>
@@ -436,16 +626,20 @@
                             Tournaments
                         </a>
                     </div>
+
                     <div class="col-2">
-                        <a href="#" class="bottom-nav-item">
+                        <a href="{{route('user.logout')}}" class="bottom-nav-item">
                             <i class="bi bi-hourglass"></i>
-                            Pending Trades
+                            logout
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
     <script src="assets/js/jquery-3.4.1.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
