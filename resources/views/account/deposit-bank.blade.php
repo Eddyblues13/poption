@@ -134,8 +134,8 @@
                     style="width: 40px; height: 40px; border-radius: 100%;">
             </div>
             <div class="d-flex align-items-center">
-                <span class="me-2">QT Real NGN</span>
-                <span class="h4 mb-0">0</span>
+                <span class="me-2">QT Real </span>
+
             </div>
         </div>
     </header>
