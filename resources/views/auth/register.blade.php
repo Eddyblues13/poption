@@ -434,6 +434,151 @@
                                     @enderror
                                 </div>
 
+                                <!-- Currency Select -->
+                                <div class="form-group form-group_with-label currency-container">
+                                    <select name="currency" class="form-control @error('currency') is-invalid @enderror"
+                                        required>
+                                        <option value="" disabled selected>Select your currency *</option>
+                                        <option value="AFN">Afghanistan - AFN</option>
+                                        <option value="ALL">Albania - ALL</option>
+                                        <option value="DZD">Algeria - DZD</option>
+                                        <option value="AOA">Angola - AOA</option>
+                                        <option value="XCD">Antigua and Barbuda - XCD</option>
+                                        <option value="ARS">Argentina - ARS</option>
+                                        <option value="AMD">Armenia - AMD</option>
+                                        <option value="AWG">Aruba - AWG</option>
+                                        <option value="AZN">Azerbaijan - AZN</option>
+                                        <option value="BSD">Bahamas - BSD</option>
+                                        <option value="BAM">Bosnia and Herzegovina - BAM</option>
+                                        <option value="BBD">Barbados - BBD</option>
+                                        <option value="BZD">Belize - BZD</option>
+                                        <option value="BMD">Bermuda - BMD</option>
+                                        <option value="BTN">Bhutan - BTN</option>
+                                        <option value="BOB">Bolivia - BOB</option>
+                                        <option value="BWP">Botswana - BWP</option>
+                                        <option value="BND">Brunei - BND</option>
+                                        <option value="BGN">Bulgaria - BGN</option>
+                                        <option value="BIF">Burundi - BIF</option>
+                                        <option value="KHR">Cambodia - KHR</option>
+                                        <option value="XAF">Cameroon - XAF</option>
+                                        <option value="CVE">Cape Verde - CVE</option>
+                                        <option value="KYD">Cayman Islands - KYD</option>
+                                        <option value="XAF">Central African Republic - XAF</option>
+                                        <option value="XAF">Chad - XAF</option>
+                                        <option value="KMF">Comoros - KMF</option>
+                                        <option value="CDF">Congo (Democratic Republic) - CDF</option>
+                                        <option value="XAF">Congo (Republic) - XAF</option>
+                                        <option value="CRC">Costa Rica - CRC</option>
+                                        <option value="CUP">Cuba - CUP</option>
+                                        <option value="DJF">Djibouti - DJF</option>
+                                        <option value="DOP">Dominican Republic - DOP</option>
+                                        <option value="ERN">Eritrea - ERN</option>
+                                        <option value="ETB">Ethiopia - ETB</option>
+                                        <option value="FJD">Fiji - FJD</option>
+                                        <option value="GMD">Gambia - GMD</option>
+                                        <option value="GTQ">Guatemala - GTQ</option>
+                                        <option value="GNF">Guinea - GNF</option>
+                                        <option value="GYD">Guyana - GYD</option>
+                                        <option value="HTG">Haiti - HTG</option>
+                                        <option value="ISK">Iceland - ISK</option>
+                                        <option value="IQD">Iraq - IQD</option>
+                                        <option value="JMD">Jamaica - JMD</option>
+                                        <option value="JOD">Jordan - JOD</option>
+                                        <option value="KZT">Kazakhstan - KZT</option>
+                                        <option value="KPW">North Korea - KPW</option>
+                                        <option value="LBP">Lebanon - LBP</option>
+                                        <option value="LSL">Lesotho - LSL</option>
+                                        <option value="LRD">Liberia - LRD</option>
+                                        <option value="MOP">Macau - MOP</option>
+                                        <option value="MWK">Malawi - MWK</option>
+                                        <option value="MVR">Maldives - MVR</option>
+                                        <option value="MRO">Mauritania - MRO</option>
+                                        <option value="MUR">Mauritius - MUR</option>
+                                        <option value="MDL">Moldova - MDL</option>
+                                        <option value="MNT">Mongolia - MNT</option>
+                                        <option value="MAD">Morocco - MAD</option>
+                                        <option value="MMK">Myanmar - MMK</option>
+                                        <option value="NPR">Nepal - NPR</option>
+                                        <option value="NIO">Nicaragua - NIO</option>
+                                        <option value="NGN">Nigeria - NGN</option>
+                                        <option value="PGK">Papua New Guinea - PGK</option>
+                                        <option value="PYG">Paraguay - PYG</option>
+                                        <option value="RON">Romania - RON</option>
+                                        <option value="RWF">Rwanda - RWF</option>
+                                        <option value="SCR">Seychelles - SCR</option>
+                                        <option value="SLL">Sierra Leone - SLL</option>
+                                        <option value="SOS">Somalia - SOS</option>
+                                        <option value="SSP">South Sudan - SSP</option>
+                                        <option value="LKR">Sri Lanka - LKR</option>
+                                        <option value="SDG">Sudan - SDG</option>
+                                        <option value="SZL">Swaziland - SZL</option>
+                                        <option value="SYP">Syria - SYP</option>
+                                        <option value="TJS">Tajikistan - TJS</option>
+                                        <option value="TZS">Tanzania - TZS</option>
+                                        <option value="TOP">Tonga - TOP</option>
+                                        <option value="TTD">Trinidad and Tobago - TTD</option>
+                                        <option value="UGX">Uganda - UGX</option>
+                                        <option value="UYU">Uruguay - UYU</option>
+                                        <option value="UZS">Uzbekistan - UZS</option>
+                                        <option value="VUV">Vanuatu - VUV</option>
+                                        <option value="YER">Yemen - YER</option>
+                                        <option value="ZMW">Zambia - ZMW</option>
+                                        <option value="USD">United States - USD</option>
+                                        <option value="EUR">European Union - EUR</option>
+                                        <option value="GBP">United Kingdom - GBP</option>
+                                        <option value="NGN">Nigeria - NGN</option>
+                                        <option value="JPY">Japan - JPY</option>
+                                        <option value="CAD">Canada - CAD</option>
+                                        <option value="AUD">Australia - AUD</option>
+                                        <option value="INR">India - INR</option>
+                                        <option value="CNY">China - CNY</option>
+                                        <option value="BRL">Brazil - BRL</option>
+                                        <option value="RUB">Russia - RUB</option>
+                                        <option value="ZAR">South Africa - ZAR</option>
+                                        <option value="KES">Kenya - KES</option>
+                                        <option value="EGP">Egypt - EGP</option>
+                                        <option value="GHS">Ghana - GHS</option>
+                                        <option value="MXN">Mexico - MXN</option>
+                                        <option value="SGD">Singapore - SGD</option>
+                                        <option value="HKD">Hong Kong - HKD</option>
+                                        <option value="CHF">Switzerland - CHF</option>
+                                        <option value="SEK">Sweden - SEK</option>
+                                        <option value="DKK">Denmark - DKK</option>
+                                        <option value="NOK">Norway - NOK</option>
+                                        <option value="TRY">Turkey - TRY</option>
+                                        <option value="KRW">South Korea - KRW</option>
+                                        <option value="THB">Thailand - THB</option>
+                                        <option value="AED">United Arab Emirates - AED</option>
+                                        <option value="SAR">Saudi Arabia - SAR</option>
+                                        <option value="PKR">Pakistan - PKR</option>
+                                        <option value="BDT">Bangladesh - BDT</option>
+                                        <option value="MYR">Malaysia - MYR</option>
+                                        <option value="IDR">Indonesia - IDR</option>
+                                        <option value="NZD">New Zealand - NZD</option>
+                                        <option value="PHP">Philippines - PHP</option>
+                                        <option value="PLN">Poland - PLN</option>
+                                        <option value="CZK">Czech Republic - CZK</option>
+                                        <option value="HUF">Hungary - HUF</option>
+                                        <option value="ILS">Israel - ILS</option>
+                                        <option value="CLP">Chile - CLP</option>
+                                        <option value="COP">Colombia - COP</option>
+                                        <option value="ARS">Argentina - ARS</option>
+                                        <option value="VND">Vietnam - VND</option>
+                                        <option value="TWD">Taiwan - TWD</option>
+                                        <option value="QAR">Qatar - QAR</option>
+                                        <option value="KWD">Kuwait - KWD</option>
+                                        <option value="BHD">Bahrain - BHD</option>
+                                        <option value="OMR">Oman - OMR</option>
+                                    </select>
+                                    <label for="currency">Currency <span>*</span></label>
+                                    @error('currency')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
                                 <!-- Password -->
                                 <div class="form-group form-group_with-label password-container">
                                     <input type="password" name="password" id="password"
