@@ -9,6 +9,10 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="bingbot" content="noindex, nofollow">
+    <meta name="scam-advisor" content="noindex, nofollow">
     <meta property="og:url" content="https://pocketoption.com/en/register/" />
     <meta property="og:title" content="Registration" />
     <meta property="og:type" content="website" />

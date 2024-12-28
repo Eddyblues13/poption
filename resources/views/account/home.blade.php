@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="bingbot" content="noindex, nofollow">
+    <meta name="scam-advisor" content="noindex, nofollow">
     <title>Crypo</title>
     <link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -568,7 +572,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <small class="text-muted">Payout</small>
-                                        <div class="text-success">₦2,505</div>
+                                        <div class="text-success">{{Auth::user()->currency}}2,505</div>
                                     </div>
                                     <div>
                                         <small class="text-muted">Profit</small>

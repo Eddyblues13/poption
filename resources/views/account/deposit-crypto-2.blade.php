@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Transfer</title>
+    <title>Crypto Deposit</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -34,6 +34,28 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+        }
+
+        .depo {
+            border-radius: 6px;
+            /* border: 1px solid white; */
+        }
+
+        .warning-box {
+            border: 1px dashed #a34b19;
+            background-color: #31262b;
+            border-radius: 6px;
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            color: var(--text-primary);
         }
 
         .card {
@@ -117,11 +139,20 @@
             color: #ffffff;
         }
 
-        .delete-btn {
-            color: #f85149;
-            background: none;
-            border: none;
-            padding: 0.25rem 0.5rem;
+        .address,
+        .amount {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 600px) {
+            .qr {
+                display: block;
+            }
+
+            .qr .item {
+                margin: 0 auto;
+            }
+
         }
     </style>
 </head>
@@ -130,7 +161,7 @@
     <header class="top-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-                <img src="assets/img/options_logo.png" alt="Logo" class="me-2"
+                <img src="img/options_logo.png" alt="Logo" class="me-2"
                     style="width: 40px; height: 40px; border-radius: 100%;">
             </div>
             <div class="d-flex align-items-center">
@@ -143,92 +174,79 @@
     <div class="main-container mb-5">
 
         <div class="row">
-            <div class="col-md-3 mt-1">
-                <h2 class="mb-4 fs-4">Account top-up</h2>
-            </div>
-            <div class="col-md-5 mt-5">
+
+            <div class="col-md-12 col-lg-8 col-sm-12 mx-auto mt-5">
                 <div class="card p-4">
                     <div class="d-flex align-items-center mb-4">
                         <button class="btn btn-link text-white text-decoration-none" onclick="window.history.back()">
                             <i class="fas fa-arrow-left"></i> Back
                         </button>
                     </div>
-                    @php
-                    $currencySymbol = $currencyMap[$currencyCode] ?? $currencyCode; // Get symbol or fallback to code
-                    @endphp
-
-                    <form method="POST" action="{{ route('payment.initiate') }}">
-                        <div class="d-flex align-items-center mb-4">
-                            <img src="assets/img/icon.webp" alt="Bank" class="me-3" style="width: 110px; height: 50px;">
-                            <div>
-                                <h5 class="mb-1 text-white">Bank Transfer ({{ $currencyCode }})</h5>
-                                <small class="text-secondary">
-                                    Commission: 0%<br>
-                                    Minimum deposit amount: {{ $currencySymbol }}7,740<br>
-                                    Max. amount per transaction: {{ $currencySymbol }}900,000<br>
-                                    Processing time: ~10 min.
-                                </small>
+                    <form>
+                        <div class="row d-flex justify-content-center align-items-center mb-4 px-3">
+                            <div class="col-6 ps-0 d-flex justify-content-center">
+                                <img src="{{ $data['image_url'] }}" alt="Bank" class="me-3"
+                                    style="width: 200px; height: 100px;">
                             </div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label text-light">Amount:</label>
-                            <input type="text" class="input-dark w-100" value="{{ $amount }}" required>
-                        </div>
-
-                        <div class="mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="promoCheck">
-                                <label class="form-check-label text-secondary" for="promoCheck">
-                                    I have a promo code
-                                </label>
-                            </div>
-
-                            <div id="promoCodeSection" class="mt-3">
-                                <label class="form-label text-light">Promo code:</label>
-                                <div class="d-flex">
-                                    <input type="text" class="input-dark flex-grow-1">
+                            <div class="col-md-6 text-light depo border border-secondary d-flex p-4">
+                                <div class="">
+                                    <h5 class="mb-0 text-white">{{ $data['currency_symbol'] }}{{ $data['amount'] }}</h5>
+                                    <small class="text-secondary">Deposit amount</small>
                                 </div>
+                                <div class="px-3">
+                                    <h5 class="mb-0 text-white">instantly</h5>
+                                    <small class="text-secondary">Processing time</small>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="mb-4">
-                            <label class="form-label text-light">Name:</label>
-                            <input type="text" class="input-dark w-100" value="{{Auth::user()->name}}" required>
+                        <div class="warning-box  text-light px-3 py-2">
+                            <p>In order to get your {{ Str::title($data['method']) }} payment processed
+                                automatically:</p>
+                            <ol>
+                                <li>The exact {{ $data['currency_code'] }} amount should reach the specified address
+                                </li>
+                                <li>Use only {{ Str::title($data['method']) }}network for your transfer</li>
+                                <li>Generate a new payment form for each new deposit</li>
+                            </ol>
+                            <p class="warning-text mb-0">Failure to meet one of the requirements will result in the loss
+                                of funds.</p>
                         </div>
-
-                        <div class="mb-4">
-                            <label class="form-label text-light">Email:</label>
-                            <input type="text" class="input-dark w-100" value="{{Auth::user()->email}}" required>
-                        </div>
-
-                        <div>
-                            <p class="mb-3 text-secondary">Choose your Gift for deposit:</p>
-                            <div class="d-flex gap-4 justify-content-center">
-                                <img src="assets/img/first.jpg" alt="Gift 1" class="gift-option">
-                                <img src="assets/img/second.jpg" alt="Gift 2" class="gift-option">
-                                <img src="assets/img/third.jpg" alt="Gift 3" class="gift-option">
-                                <img src="assets/img/fourth.jpg" alt="Gift 4" class="gift-option">
-                                <img src="assets/img/fifth.jpg" alt="Gift 5" class="gift-option">
+                        <div class="mb-4 mt-4">
+                            <p class="text-secondary mb-2">To complete the payment, please transfer</p>
+                            <div class="input-dark d-flex justify-content-between align-items-center">
+                                <span class="text-white amount">
+                                    ({{ $data['currency_symbol'] }}{{ number_format((float)$data['amount'], 2) }})
+                                </span>
+                                <button class="copy-btn"
+                                    onclick="copyToClipboard('{{ $data['currency_symbol'] }}{{ number_format((float)$data['amount'], 2) }}')">
+                                    <i class="far fa-copy"></i> Copy
+                                </button>
                             </div>
                         </div>
 
-                </div>
-            </div>
 
-            <div class="col-md-4 mt-5">
-                <div class="px-1">
-                    <h6 class="mb-3 text-secondary">You receive:</h6>
-                    <h3 class="mb-3 text-light">{{ $currencySymbol }}{{ number_format($amount, 2) }}</h3>
-
-
-                    <button type="submit" class="btn-primary-custom py-1 px-1 mb-4">
-                        Continue and pay {{ $currencySymbol }}{{ number_format($amount, 2) }}
-                    </button>
-
+                        <div class="mb-4">
+                            <p class="text-secondary mb-2">to the address via {{ Str::title($data['method']) }} network
+                            </p>
+                            <div class="input-dark d-flex justify-content-between align-items-center">
+                                <span class="text-white address" style="font-size: 0.9em;">{{ $data['wallet'] }}</span>
+                                <button class="copy-btn" onclick="copyToClipboard({{ $data['wallet'] }})">
+                                    <i class="far fa-copy"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row d-md-flex justify-content-center align-items-center qr px-3">
+                            <div class="col-6 item">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ urlencode({{ $data['wallet'] }}) }}"
+                                    width="140" height="140" alt="qrcode">
+                            </div>
+                            <div class="col-6 text-secondary item">
+                                <p>Or simply scan the generated Qr code to make your payment.
+                                </p>
+                            </div>
+                        </div>
                     </form>
-
-                    <h6 class="mb-3 text-light">Do you have questions or need help with account top-up?</h6>
-                    <a href="#" class="text-info d-block mb-2">View our User Guide</a>
-                    <a href="#" class="text-info d-block">Contact Support Service</a>
                 </div>
             </div>
         </div>
@@ -262,27 +280,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/97805ec877.js" crossorigin="anonymous"></script>
     <script>
-        // Toggle promo code section visibility
-        const promoCheck = document.getElementById('promoCheck');
-        const promoCodeSection = document.getElementById('promoCodeSection');
-
-        promoCheck.addEventListener('change', function() {
-            promoCodeSection.style.display = this.checked ? 'block' : 'none';
-        });
-
-        // Initialize the promo code section based on checkbox state
-        promoCodeSection.style.display = promoCheck.checked ? 'block' : 'none';
-
-
-        // Handle gift selection
-        document.querySelectorAll('.gift-option').forEach(gift => {
-            gift.addEventListener('click', function() {
-                document.querySelectorAll('.gift-option').forEach(g => {
-                    g.style.border = 'none';
-                });
-                this.style.border = '2px solid var(--accent-green)';
+        //Copy icon 
+      function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
             });
-        });
+      }
+
     </script>
 </body>
 

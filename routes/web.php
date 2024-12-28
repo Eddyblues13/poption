@@ -17,6 +17,7 @@ Route::post('/trade', [App\Http\Controllers\HomeController::class, 'trade'])->na
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 Route::get('/bank-deposit', [App\Http\Controllers\HomeController::class, 'bankDeposit'])->name('bank.deposit');
 Route::get('/crypto-deposit', [App\Http\Controllers\HomeController::class, 'cryptoDeposit'])->name('crypto.deposit');
+Route::post('/crypto-deposit', [App\Http\Controllers\HomeController::class, 'submitCryptoDeposit'])->name('submit.crypto.deposit');
 Route::post('/make-deposit', [App\Http\Controllers\HomeController::class, 'depositPage'])->name('deposit.page');
 Route::get('/withdrawal', [App\Http\Controllers\HomeController::class, 'withdrawal'])->name('withdrawal');
 // Payment Routes

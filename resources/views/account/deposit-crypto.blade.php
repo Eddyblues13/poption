@@ -142,67 +142,105 @@
             <div class="col-md-5 mt-5">
                 <div class="card p-4">
                     <div class="d-flex align-items-center mb-4">
-                        <button class="btn btn-link text-white text-decoration-none">
+                        <button class="btn btn-link text-white text-decoration-none" onclick="window.history.back()">
                             <i class="fas fa-arrow-left"></i> Back
                         </button>
-                    </div>
-                    <form>
+                        
+                    </div> @php
+                    $currencySymbol = $currencyMap[$currencyCode] ?? $currencyCode; // Get symbol or fallback to code
+                    @endphp
+
+                    <form action="{{ route('submit.crypto.deposit') }}" method="POST">
+                        @csrf
+
                         <div class="d-flex align-items-center mb-4">
-                            <img src="assets/img/usdt-ton.webp" alt="Bank" class="me-3" style="width: 110px; height: 50px;">
+                            @php
+                            $images = [
+                            'bitcoin' => 'https://cryptologos.cc/logos/bitcoin-btc-logo.webp',
+                            'litecoin' => 'https://cryptologos.cc/logos/litecoin-ltc-logo.webp',
+                            'ethereum' => 'https://cryptologos.cc/logos/ethereum-eth-logo.webp',
+                            'usdt' => 'https://example.com/trc20-image-url.webp',
+                            ];
+                            $imageUrl = $images[strtolower($method ?? '')] ?? 'https://example.com/default-image.webp';
+                            @endphp
+                            <img src="{{ $imageUrl }}" alt="{{ ucfirst($method ?? '') }}" class="me-3"
+                                style="width: 110px; height: 50px;">
                             <div>
-                                <h5 class="mb-1 text-white">Tether (USDT) TON</h5>
+
+                                <input type="hidden" name="image_url" value="{{ $imageUrl }}">
+                                <input type="hidden" name="wallet" value="{{ $walletAddress }}">
+                                <input type="hidden" name="currency_symbol" value="{{ $currencySymbol }}">
+                                <input type="hidden" name="currency_code" value="{{ $currencyCode }}">
+                                <input type="hidden" name="method" value="{{ $method }}">
+                                <h5 class="mb-1 text-white">{{ Str::title($method ?? 'Unknown Method') }}</h5>
                                 <small class="text-secondary">
                                     Commission: 0%<br>
-                                    Minimum deposit amount: ₦7,740<br>
-                                    Max. amount per transaction: ₦900,000<br>
+                                    Minimum deposit amount: {{ $currencySymbol ?? '' }}7,740<br>
+                                    Max. amount per transaction: {{ $currencySymbol ?? '' }}900,000<br>
                                     Processing time: 3-5 min.
                                 </small>
                             </div>
                         </div>
                         <div class="mb-4">
                             <label class="form-label text-light">Amount:</label>
-                            <input type="text" class="input-dark w-100" value="15,500" required>
+                            <input type="text" name="amount" class="input-dark w-100" value="15,500" required>
                         </div>
-
                         <div class="mb-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="promoCheck">
+                                <input class="form-check-input" type="checkbox" id="promoCheck" name="has_promo">
                                 <label class="form-check-label text-secondary" for="promoCheck">
                                     I have a promo code
                                 </label>
                             </div>
-
                             <div id="promoCodeSection" class="mt-3">
                                 <label class="form-label text-light">Promo code:</label>
                                 <div class="d-flex">
-                                    <input type="text" class="input-dark flex-grow-1">
+                                    <input type="text" name="promo_code" class="input-dark flex-grow-1">
                                 </div>
                             </div>
                         </div>
-
                         <div>
                             <p class="mb-3 text-secondary">Choose your Gift for deposit:</p>
                             <div class="d-flex gap-4 justify-content-center">
-                                <img src="assets/img/first.jpg" alt="Gift 1" class="gift-option">
-                                <img src="assets/img/second.jpg" alt="Gift 2" class="gift-option">
-                                <img src="assets/img/third.jpg" alt="Gift 3" class="gift-option">
-                                <img src="assets/img/fourth.jpg" alt="Gift 4" class="gift-option">
-                                <img src="assets/img/fifth.jpg" alt="Gift 5" class="gift-option">
+                                <label>
+                                    <input type="radio" name="gift" value="first" hidden>
+                                    <img src="assets/img/first.jpg" alt="Gift 1" class="gift-option">
+                                </label>
+                                <label>
+                                    <input type="radio" name="gift" value="second" hidden>
+                                    <img src="assets/img/second.jpg" alt="Gift 2" class="gift-option">
+                                </label>
+                                <label>
+                                    <input type="radio" name="gift" value="third" hidden>
+                                    <img src="assets/img/third.jpg" alt="Gift 3" class="gift-option">
+                                </label>
+                                <label>
+                                    <input type="radio" name="gift" value="fourth" hidden>
+                                    <img src="assets/img/fourth.jpg" alt="Gift 4" class="gift-option">
+                                </label>
+                                <label>
+                                    <input type="radio" name="gift" value="fifth" hidden>
+                                    <img src="assets/img/fifth.jpg" alt="Gift 5" class="gift-option">
+                                </label>
                             </div>
                         </div>
-                    </form>
+
+
+
                 </div>
             </div>
 
             <div class="col-md-4 mt-5">
                 <div class="px-1">
                     <h6 class="mb-3 text-secondary">You receive:</h6>
-                    <h3 class="mb-3 text-light">₦15,500</h3>
+                    <h3 class="mb-3 text-light">{{ $currencySymbol }}{{ number_format($amount, 2) }}</h3>
                     <p class="text-warning">+ 0 numbers for the New Year Celebration</p>
 
-                    <button class="btn-primary-custom py-1 px-1 mb-4">
-                        Continue and pay ₦15,500<br> (10.03 USDT)
+                    <button type="submit" class="btn-primary-custom py-1 px-1 mb-4">
+                        Continue and pay {{ $currencySymbol }}{{ number_format($amount, 2) }}<br> ({{
+                        number_format($amount, 2) }} {{ $currencyCode }})
                     </button>
+                    </form>
 
                     <h6 class="mb-3 text-light">Do you have questions or need help with account top-up?</h6>
                     <a href="#" class="text-info d-block mb-2">View our User Guide</a>

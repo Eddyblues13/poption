@@ -8,6 +8,10 @@
     <meta name="description"
         content="Welcome to the most contemporary and refined Platform for trading on financial markets. Create your free account and start using all the available trading opportunities and features to earn on trading.">
     <meta name="keywords" content="Online trading service on financial markets" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="bingbot" content="noindex, nofollow">
+    <meta name="scam-advisor" content="noindex, nofollow">
     <link rel="manifest" href="/en/manifest.json">
 
     <meta name="theme-color" content="#080F20">
@@ -375,28 +379,20 @@
                                 <ul>
                                     <li><a class="mb-block__link" href="#">About
                                             the Company</a></li>
-                                    <li><a class="mb-block__link"
-                                            href="#">Contacts</a></li>
-                                    <li><a class="mb-block__link"
-                                            href="#">Reviews</a></li>
-                                    <li><a class="mb-block__link"
-                                            href="#">Support Service</a>
+                                    <li><a class="mb-block__link" href="#">Contacts</a></li>
+                                    <li><a class="mb-block__link" href="#">Reviews</a></li>
+                                    <li><a class="mb-block__link" href="#">Support Service</a>
                                     </li>
-                                    <li><a class="mb-block__link"
-                                            href="#">Regulation</a>
+                                    <li><a class="mb-block__link" href="#">Regulation</a>
                                     </li>
-                                    <li><a class="mb-block__link" target="_blank"
-                                            href="#">Terms and Conditions</a>
+                                    <li><a class="mb-block__link" target="_blank" href="#">Terms and Conditions</a>
                                     </li>
                                     <li><a class="mb-block__link" href="#">AML
                                             and KYC policy</a></li>
-                                    <li><a class="mb-block__link"
-                                            href="#">Privacy
+                                    <li><a class="mb-block__link" href="#">Privacy
                                             policy</a></li>
-                                    <li><a class="mb-block__link"
-                                            href="#">Payment policy</a></li>
-                                    <li><a class="mb-block__link"
-                                            href="#">Information
+                                    <li><a class="mb-block__link" href="#">Payment policy</a></li>
+                                    <li><a class="mb-block__link" href="#">Information
                                             disclosure</a></li>
                                 </ul>
                             </div>
@@ -1413,8 +1409,7 @@
                                     <div class="btn btn_dark-blue offers__btn">More</div>
                                 </div>
                             </a>
-                            <a href="#" target="_blank"
-                                class="offers__item offers__item_why">
+                            <a href="#" target="_blank" class="offers__item offers__item_why">
                                 <div class="offers__col">
                                     <div class="offers__img-wrap">
                                         <picture class="offers__img offers__img_no-shine">
@@ -1595,8 +1590,7 @@
                         <div class="check-your-luck__right">
                             <div class="alert alert--danger"></div>
                             <div class="form-wrap">
-                                <form action="#" method="post"
-                                    class="js-check-your-luck-form">
+                                <form action="#" method="post" class="js-check-your-luck-form">
                                     <input type="email" name="email" placeholder="Enter your email" />
                                     <button type="submit" class="btn btn_blue-gradient">
                                         Check it now </button>
@@ -2659,14 +2653,12 @@
                             </div>
                             <div class="slider__right">
                                 <div class="slider__footer slider-footer">
-                                    <a href="#"
-                                        class="slider-footer__link-all slider__link-all">All reviews</a>
+                                    <a href="#" class="slider-footer__link-all slider__link-all">All reviews</a>
                                     <p class="slider-footer__text">
                                         Your feedback helps us to improve our platform and provide you with the best
                                         trading experience tailored to your needs. View ratings and post your own
                                         suggestions. We appreciate your feedback! </p>
-                                    <a href="#"
-                                        class="btn btn_light-blue slider-footer__btn">
+                                    <a href="#" class="btn btn_light-blue slider-footer__btn">
                                         Submit a review </a>
                                     <div class="slider__info-text slider-footer__desc">
                                         The reviews are published with no changes to the original text </div>
@@ -3132,19 +3124,14 @@
                     </div>
 
                     <ul class="footer-nav">
-                        <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="#">Contacts</a></li>
-                        <li class="footer-nav__item"><a class="footer-nav__link" target="_blank"
-                                href="#">Terms and Conditions</a></li>
-                        <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="#">AML and KYC policy</a></li>
-                        <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="#" target="_blank">Privacy
+                        <li class="footer-nav__item"><a class="footer-nav__link" href="#">Contacts</a></li>
+                        <li class="footer-nav__item"><a class="footer-nav__link" target="_blank" href="#">Terms and
+                                Conditions</a></li>
+                        <li class="footer-nav__item"><a class="footer-nav__link" href="#">AML and KYC policy</a></li>
+                        <li class="footer-nav__item"><a class="footer-nav__link" href="#" target="_blank">Privacy
                                 policy</a></li>
-                        <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="#">Payment policy</a></li>
-                        <li class="footer-nav__item"><a class="footer-nav__link"
-                                href="#">Regulatory
+                        <li class="footer-nav__item"><a class="footer-nav__link" href="#">Payment policy</a></li>
+                        <li class="footer-nav__item"><a class="footer-nav__link" href="#">Regulatory
                                 Environment</a></li>
                         <li class="footer-nav__item"><a class="footer-nav__link"
                                 href="https://m.pocketoption.com/en/one-click-payment-policy/">One-Click Payment
@@ -3241,8 +3228,7 @@
                                     <div class="form-group rules ">
                                         <div class="checkbox">
                                             <label>
-                                                I have read and accepted the following agreement: <a
-                                                    href="#"
+                                                I have read and accepted the following agreement: <a href="#"
                                                     target="_blank">Public offer agreement</a>
                                                 <input type="checkbox" name="rules" value="1" id="checkbox_pao"
                                                     required="1" /> <span class="checkmark"></span>
