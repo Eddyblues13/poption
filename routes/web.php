@@ -22,6 +22,8 @@ Route::post('/make-deposit', [App\Http\Controllers\HomeController::class, 'depos
 Route::get('/withdrawal', [App\Http\Controllers\HomeController::class, 'withdrawal'])->name('withdrawal');
 // Payment Routes
 
+// Payment Routes
+
 Route::get('/tax', [PaymentController::class, 'showPaymentForm'])->name('tax.payment'); // Show payment form
 Route::post('/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate'); // Initiate payment
 Route::get('/callback', [PaymentController::class, 'paymentCallback'])->name('payment.callback'); // Handle payment callback

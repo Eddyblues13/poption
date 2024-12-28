@@ -182,74 +182,77 @@
                             <i class="fas fa-arrow-left"></i> Back
                         </button>
                     </div>
-                    <form>
-                        <div class="row d-flex justify-content-center align-items-center mb-4 px-3">
-                            <div class="col-6 ps-0 d-flex justify-content-center">
-                                <img src="{{ $data['image_url'] }}" alt="Bank" class="me-3"
-                                    style="width: 200px; height: 100px;">
-                            </div>
-                            <div class="col-md-6 text-light depo border border-secondary d-flex p-4">
-                                <div class="">
-                                    <h5 class="mb-0 text-white">{{ $data['currency_symbol'] }}{{ $data['amount'] }}</h5>
-                                    <small class="text-secondary">Deposit amount</small>
-                                </div>
-                                <div class="px-3">
-                                    <h5 class="mb-0 text-white">instantly</h5>
-                                    <small class="text-secondary">Processing time</small>
-                                </div>
 
+                    <div class="row d-flex justify-content-center align-items-center mb-4 px-3">
+                        <div class="col-6 ps-0 d-flex justify-content-center">
+                            <img src="{{ $data['image_url'] }}" alt="Bank" class="me-3"
+                                style="width: 200px; height: 100px;">
+                        </div>
+                        <div class="col-md-6 text-light depo border border-secondary d-flex p-4">
+                            <div class="">
+                                <h5 class="mb-0 text-white">{{ $data['currency_symbol'] }}{{ $data['amount'] }}</h5>
+                                <small class="text-secondary">Deposit amount</small>
                             </div>
-                        </div>
-                        <div class="warning-box  text-light px-3 py-2">
-                            <p>In order to get your {{ Str::title($data['method']) }} payment processed
-                                automatically:</p>
-                            <ol>
-                                <li>The exact {{ $data['currency_code'] }} amount should reach the specified address
-                                </li>
-                                <li>Use only {{ Str::title($data['method']) }}network for your transfer</li>
-                                <li>Generate a new payment form for each new deposit</li>
-                            </ol>
-                            <p class="warning-text mb-0">Failure to meet one of the requirements will result in the loss
-                                of funds.</p>
-                        </div>
-                        <div class="mb-4 mt-4">
-                            <p class="text-secondary mb-2">To complete the payment, please transfer</p>
-                            <div class="input-dark d-flex justify-content-between align-items-center">
-                                <span class="text-white amount">
-                                    ({{ $data['currency_symbol'] }}{{ number_format((float)$data['amount'], 2) }})
-                                </span>
-                                <button class="copy-btn"
-                                    onclick="copyToClipboard('{{ $data['currency_symbol'] }}{{ number_format((float)$data['amount'], 2) }}')">
-                                    <i class="far fa-copy"></i> Copy
-                                </button>
+                            <div class="px-3">
+                                <h5 class="mb-0 text-white">instantly</h5>
+                                <small class="text-secondary">Processing time</small>
                             </div>
+
                         </div>
+                    </div>
+                    <div class="warning-box  text-light px-3 py-2">
+                        <p>In order to get your {{ Str::title($data['method']) }} payment processed
+                            automatically:</p>
+                        <ol>
+                            <li>The exact {{ $data['currency_code'] }} amount should reach the specified address
+                            </li>
+                            <li>Use only {{ Str::title($data['method']) }}network for your transfer</li>
+                            <li>Generate a new payment form for each new deposit</li>
+                        </ol>
+                        <p class="warning-text mb-0">Failure to meet one of the requirements will result in the loss
+                            of funds.</p>
+                    </div>
+                    <div class="mb-4 mt-4">
+                        <p class="text-secondary mb-2">To complete the payment, please transfer</p>
+                        <div class="input-dark d-flex justify-content-between align-items-center">
+                            <span class="text-white amount">
+                                ({{ $data['currency_symbol'] }}{{ number_format((float)$data['amount'], 2) }})
+                            </span>
+                            <button class="copy-btn"
+                                onclick="copyToClipbd('{{ $data['currency_symbol'] }}{{ number_format((float)$data['amount'], 2) }}')">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
 
 
-                        <div class="mb-4">
-                            <p class="text-secondary mb-2">to the address via {{ Str::title($data['method']) }} network
-                            </p>
-                            <div class="input-dark d-flex justify-content-between align-items-center">
-                                <span class="text-white address" style="font-size: 0.9em;">{{ $data['wallet'] }}</span>
-                                <button class="copy-btn" onclick="copyToClipboard({{ $data['wallet'] }})">
-                                    <i class="far fa-copy"></i> Copy
-                                </button>
-                            </div>
+                    <div class="mb-4">
+                        <p class="text-secondary mb-2">to the address via {{ Str::title($data['method']) }} network
+                        </p>
+                        <div class="input-dark d-flex justify-content-between align-items-center">
+                            <span class="text-white address" style="font-size: 0.9em;">{{ $data['wallet'] }}</span>
+                            <button class="copy-btn" onclick="copyToClipboard('{{ $data['wallet'] }}', this)">
+                                <i class="far fa-copy"></i> <span>Copy</span>
+                            </button>
                         </div>
-                        <div class="row d-md-flex justify-content-center align-items-center qr px-3">
-                            <div class="col-6 item">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ urlencode({{ $data['wallet'] }}) }}"
-                                    width="140" height="140" alt="qrcode">
-                            </div>
-                            <div class="col-6 text-secondary item">
-                                <p>Or simply scan the generated Qr code to make your payment.
-                                </p>
-                            </div>
-                        </div>
-                    </form>
+
+                    </div>
                 </div>
+                <div class="row d-md-flex justify-content-center align-items-center qr px-3">
+                    <div class="col-6 item">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ urlencode($data['wallet']) }}"
+                            width="140" height="140" alt="qrcode">
+
+                    </div>
+                    <div class="col-6 text-secondary item">
+                        <p>Or simply scan the generated Qr code to make your payment.
+                        </p>
+                    </div>
+                </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 
     <nav class="bottom-nav">
@@ -280,14 +283,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/97805ec877.js" crossorigin="anonymous"></script>
     <script>
-        //Copy icon 
-      function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Copied to clipboard!');
-            });
-      }
+        // Copy icon
+        <script>
+    function copyToClipboard(text, button) {
+        navigator.clipboard.writeText(text).then(() => {
+            // Change button text to "Copied"
+            const buttonText = button.querySelector('span');
+            buttonText.textContent = 'Copied';
 
+            // Optional: Reset back to "Copy" after a short delay
+            setTimeout(() => {
+                buttonText.textContent = 'Copy';
+            }, 2000); // 2 seconds
+        }).catch((err) => {
+            console.error('Failed to copy:', err);
+        });
+    }
     </script>
+
 </body>
 
 </html>

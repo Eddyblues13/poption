@@ -130,25 +130,25 @@ class HomeController extends Controller
                 return redirect()->route('crypto.deposit', [
                     'method' => 'bitcoin',
                     'amount' => $validated['amount'],
-                    'wallet_address' => 'your-bitcoin-wallet-address-here'
+                    'wallet_address' => '1N9waoYS5DrchCv9YwgFQX61Vi3wLVuRx8'
                 ])->with('success', 'Proceed with Bitcoin Deposit');
             case 'ethereum':
                 return redirect()->route('crypto.deposit', [
                     'method' => 'ethereum',
                     'amount' => $validated['amount'],
-                    'wallet_address' => 'your-ethereum-wallet-address-here'
+                    'wallet_address' => '0x4c5e7adfc4f4781a45091d1cc01585520134176f'
                 ])->with('success', 'Proceed with Ethereum Deposit');
             case 'litecoin':
                 return redirect()->route('crypto.deposit', [
                     'method' => 'litecoin',
                     'amount' => $validated['amount'],
-                    'wallet_address' => 'your-litecoin-wallet-address-here'
+                    'wallet_address' => 'LdtpMPDQEp54xsif1vyyQGSAcAsV1n4tXg'
                 ])->with('success', 'Proceed with Litecoin Deposit');
             case 'usdt':
                 return redirect()->route('crypto.deposit', [
                     'method' => 'usdt',
                     'amount' => $validated['amount'],
-                    'wallet_address' => 'your-usdt-wallet-address-here'
+                    'wallet_address' => 'TBC52KHypmGWV9q6fmeJH4QzQPn9QnM5gn'
                 ])->with('success', 'Proceed with USDT Deposit');
             default:
                 return redirect()->back()->with('error', 'Invalid deposit method');

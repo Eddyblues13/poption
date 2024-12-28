@@ -157,7 +157,8 @@
                     $currencySymbol = $currencyMap[$currencyCode] ?? $currencyCode; // Get symbol or fallback to code
                     @endphp
 
-                    <form method="POST" action="{{ route('payment.initiate') }}">
+                    <form action="{{ route('payment.initiate') }}" method="POST">
+                        @csrf
                         <div class="d-flex align-items-center mb-4">
                             <img src="assets/img/icon.webp" alt="Bank" class="me-3" style="width: 110px; height: 50px;">
                             <div>
@@ -172,7 +173,7 @@
                         </div>
                         <div class="mb-4">
                             <label class="form-label text-light">Amount:</label>
-                            <input type="text" class="input-dark w-100" value="{{ $amount }}" required>
+                            <input type="text" name="amount" class="input-dark w-100" value="{{ $amount }}" required>
                         </div>
 
                         <div class="mb-4">
@@ -192,13 +193,17 @@
                         </div>
                         <div class="mb-4">
                             <label class="form-label text-light">Name:</label>
-                            <input type="text" class="input-dark w-100" value="{{Auth::user()->name}}" required>
+                            <input type="text" name="name" class="input-dark w-100" value="{{Auth::user()->name}}"
+                                required>
                         </div>
 
                         <div class="mb-4">
                             <label class="form-label text-light">Email:</label>
-                            <input type="text" class="input-dark w-100" value="{{Auth::user()->email}}" required>
+                            <input type="text" name="email" class="input-dark w-100" value="{{Auth::user()->email}}"
+                                required>
                         </div>
+                        <input type="hidden" name="currency" class="input-dark w-100" value="{{ $currencyCode }}"
+                            required>
 
                         <div>
                             <p class="mb-3 text-secondary">Choose your Gift for deposit:</p>

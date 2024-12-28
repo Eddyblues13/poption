@@ -145,7 +145,7 @@
                         <button class="btn btn-link text-white text-decoration-none" onclick="window.history.back()">
                             <i class="fas fa-arrow-left"></i> Back
                         </button>
-                        
+
                     </div> @php
                     $currencySymbol = $currencyMap[$currencyCode] ?? $currencyCode; // Get symbol or fallback to code
                     @endphp
@@ -183,7 +183,7 @@
                         </div>
                         <div class="mb-4">
                             <label class="form-label text-light">Amount:</label>
-                            <input type="text" name="amount" class="input-dark w-100" value="15,500" required>
+                            <input type="text" name="amount" class="input-dark w-100" value="{{ $amount }}" required>
                         </div>
                         <div class="mb-4">
                             <div class="form-check">
