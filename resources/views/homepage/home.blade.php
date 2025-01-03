@@ -8,10 +8,11 @@
     <meta name="description"
         content="Welcome to the most contemporary and refined Platform for trading on financial markets. Create your free account and start using all the available trading opportunities and features to earn on trading.">
     <meta name="keywords" content="Online trading service on financial markets" />
+    {{--
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
     <meta name="bingbot" content="noindex, nofollow">
-    <meta name="scam-advisor" content="noindex, nofollow">
+    <meta name="scam-advisor" content="noindex, nofollow"> --}}
     <link rel="manifest" href="/en/manifest.json">
 
     <meta name="theme-color" content="#080F20">
@@ -169,12 +170,7 @@
         var languages = {"validations":{"email.required":"Please enter your email address","email.email":"Please enter a VALID email address"}};
     </script>
 
-    <script
-        src="https://recaptcha.net/recaptcha/api.js?render=6LeJDkwpAAAAAFUuiKS66HQe6Jz-Z-uPp5Dl6q5B&onload=onloadRecaptchaCallback">
-    </script>
-    <script type="text/javascript">
-        var AppCaptcha = {"captchaKey":"6LeJDkwpAAAAAFUuiKS66HQe6Jz-Z-uPp5Dl6q5B","isBotUrl":"https:\/\/m.pocketoption.com\/en\/api\/captcha\/is-bot\/"};
-    </script>
+
 
     <link rel="stylesheet" href="themes/cabinet/css/new-year-2024/site.min.css?v=1734687255">
 </head>
@@ -186,28 +182,7 @@
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Perfomance monitoring -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getPerformance } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-performance.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDF4Nd5rP-y-RI_TilZvj_TJLI2XO-g0Ls",
-            authDomain: "pocketoption-2f478.firebaseapp.com",
-            databaseURL: "https://pocketoption-2f478.firebaseio.com",
-            projectId: "pocketoption-2f478",
-            storageBucket: "pocketoption-2f478.appspot.com",
-            messagingSenderId: "602028090392",
-            appId: "1:602028090392:web:ec99330a76e80254e94f6d",
-            measurementId: "G-1JEDFHE9YB"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        // Initialize Performance Monitoring
-        const performance = getPerformance(app);
-    </script>
-    <!-- End perfomance monitoring -->
 
     <div class="mobile-block js-mobile-block">
         <div class="container mobile-block__container">
@@ -1601,57 +1576,7 @@
                 </div>
             </section>
 
-            <div class="check-your-luck-captcha-modal" id="check-your-luck-captcha-modal" style="display: none">
-                <div class="captcha-block js-recaptcha-block">
 
-
-                    <script type="text/javascript">
-                        function refreshCaptcha(button) {
-        button.setAttribute('disabled', 'disabled');
-        button.classList.add('animate-rotate');
-        fetch('https://m.pocketoption.com/en/refresh-captcha/')
-            .then(response => response.json())
-            .then(data => {
-                if (!data.html) return;
-
-                button.classList.remove('animate-rotate');
-                const elems = document.querySelectorAll('.js-recaptcha-block');
-                elems.forEach(ele => {
-                    ele.innerHTML = data.html;
-                })
-                const inputs = document.querySelectorAll('.js-recaptcha-input');
-                inputs.forEach(ele => {
-                    ele.addEventListener('input', function(){
-                        if (ele.value) {
-                            ele.classList.add('form-control_filled');
-                        } else {
-                            ele.classList.remove('form-control_filled');
-                        }
-                    })
-                })
-            }).catch(() => {});
-    }
-                    </script>
-
-                    <style>
-                        .animate-rotate {
-                            animation: capchaRotate linear 1s infinite;
-                            transform-origin: center;
-                        }
-
-                        @keyframes capchaRotate {
-                            0% {
-                                transform: rotate(0);
-                            }
-
-                            100% {
-                                transform: rotate(360deg);
-                            }
-                        }
-                    </style>
-                </div>
-                <button type="submit" class="btn btn_blue-gradient confirm-btn">Confirm</button>
-            </div>
 
             <section class="section section_light applications">
                 <div class="container">
@@ -3428,35 +3353,7 @@
 
     <script src="themes/2017-09/js/main.js?v=1734687251"></script>
 
-    <script>
-        window.recaptchaWidgets = {};
 
-    function onloadRecaptchaCallback() {
-        renderRecaptchaWidgets();
-    }
-
-    function renderRecaptchaWidgets() {
-        const recaptchaWidgets = document.querySelectorAll('.js-recaptcha-widget');
-        if (!recaptchaWidgets) {
-            return;
-        }
-
-        const params = {
-            sitekey : '6LcU2hgUAAAAAPHmrOrfTDy6DnROjq7Mr8LNwhNF',
-            theme : 'light'
-        };
-
-        recaptchaWidgets.forEach(function(recaptchaWidget) {
-            if (recaptchaWidget.dataset.callback) {
-                params['callback'] = recaptchaWidget.dataset.callback;
-            }
-            if (recaptchaWidget.dataset.hl) {
-                params['hl'] = recaptchaWidget.dataset.hl;
-            }
-            window.recaptchaWidgets[recaptchaWidget.dataset.name] = grecaptcha.render(recaptchaWidget, params);
-        });
-    }
-    </script>
 </body>
 
 </html>

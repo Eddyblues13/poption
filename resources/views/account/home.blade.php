@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
 
 <style>
@@ -24,13 +25,19 @@
         --buy-green: #22c55e;
         --sell-red: #ef4444;
         --chart-blue: #3b82f6;
+        --sidebar-width: 320px;
+        --sidebar-bg: #1a1f2c;
+        --text-color: #a7b7d0;
+        --scrollbar-thumb: #2a3142;
     }
 
     body {
         background-color: var(--dark-blue);
         color: #fff;
         min-height: 100vh;
+
     }
+
 
     .trading-header {
         background-color: var(--darker-blue);
@@ -241,6 +248,160 @@
 
         }
     }
+
+    .profile-trigger {
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        cursor: pointer;
+        z-index: 999;
+    }
+
+    #sidebar {
+        width: var(--sidebar-width);
+        background-color: var(--sidebar-bg);
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #sidebar.active {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    .sidebar-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-section {
+        padding: 20px;
+        border-bottom: 1px solid rgba(167, 183, 208, 0.1);
+    }
+
+    .scrollable-nav {
+        overflow-y: auto;
+        flex-grow: 1;
+        padding-right: 8px;
+    }
+
+    .scrollable-nav::-webkit-scrollbar {
+        width: 8px;
+        background-color: var(--sidebar-bg);
+    }
+
+    .scrollable-nav::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb);
+        border-radius: 4px;
+    }
+
+    .scrollable-nav::-webkit-scrollbar-thumb:hover {
+        background-color: #3a4152;
+    }
+
+    .nav-link {
+        color: var(--text-color) !important;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(167, 183, 208, 0.1);
+    }
+
+    .profile-avatar {
+        width: 60px;
+        height: 60px;
+        background-color: #2a3142;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .user-info {
+        color: var(--text-color);
+        font-size: 0.9rem;
+    }
+
+    .deposit-btn {
+        color: var(--text-color);
+        width: 100%;
+        padding: 10px;
+        margin: 15px 0;
+        border-radius: 4px;
+    }
+
+    .celebration-banner {
+        background: linear-gradient(45deg, #2a3142, #1a1f2c);
+        color: var(--text-color);
+        padding: 10px 20px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+    }
+
+    .close-btn {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        background: none;
+        border: none;
+        color: var(--text-color);
+    }
+
+    .badge-custom {
+        background-color: #2a3142;
+        color: var(--text-color);
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+    }
+
+    .overlay.active {
+        display: block;
+    }
+
+    .deposit-btn {
+        border: 1px solid #025b44 !important;
+        background-color: #172832 !important;
+        box-shadow: none;
+    }
+
+    .deposit-btn:hover {
+        background-color: #025b44 !important;
+
+    }
 </style>
 
 <body id="dark">
@@ -248,12 +409,11 @@
 
         <nav class="navbar navbar-expand-lg">
             <a class="nav-link px-3" href="#" role="button" data-toggle="collapse" data-target="#sidebar"
-                aria-expanded="false" aria-controls="sidebar">
-                {{-- <img src="assets/img/poplogo.png" width="30" height="30" alt="logo"
-                    class="img-fluid rounded-circle"> --}}
-                <button class="btn btn-outline-light btn-gradient">
+                aria-expanded="false" aria-controls="sidebar" id="profileTrigger">
+                <img src="assets/img/poplogo.png" width="30" height="30" alt="logo" class="img-fluid rounded-circle">
+                {{-- <button class="btn btn-outline-light btn-gradient" id="profileTrigger">
                     <img src="assets/img/2.png" width="30" height="30" alt="logo" class="img-fluid">
-                </button>
+                </button> --}}
             </a>
 
             <!-- Sidebar -->
@@ -438,11 +598,116 @@
                             </div>
                         </div>
                     </li>
-                    
+
 
                 </ul>
             </div>
         </nav>
+
+        {{-- profile toggle starts here --}}
+
+        <div class="overlay" id="overlay"></div>
+
+        <div id="sidebar">
+            <div class="sidebar-content">
+                <button class="close-btn" id="closeSidebar">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+
+                <div class="profile-section">
+                    <div class="d-flex gap-3 align-items-center mb-3">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user fa-lg text-secondary"></i>
+                        </div>
+                        <div class="user-info">
+                            <div>Unknown client</div>
+                            <div class="text-secondary">ID 90236937</div>
+                            <div class="text-secondary">102.90.82.100</div>
+                        </div>
+                    </div>
+                    <button class="deposit-btn">
+                        <i class="fas fa-wallet me-2"></i>
+                        Deposit
+                    </button>
+                </div>
+
+                <div class="celebration-banner">
+                    <i class="fas fa-gift me-2"></i>
+                    NEW YEAR CELEBRATION
+                </div>
+
+                <div class="scrollable-nav">
+                    <nav class="nav flex-column">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Trading</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-wallet"></i>
+                            <span>Finance</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Market</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-trophy"></i>
+                            <span>Achievements</span>
+                            <span class="badge-custom ms-auto">4</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-comments"></i>
+                            <span>Chat</span>
+                            <span class="badge-custom ms-auto">7</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-globe"></i>
+                            <span>English</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const profileTrigger = document.getElementById('profileTrigger');
+        const closeBtn = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        profileTrigger.addEventListener('click', openSidebar);
+        closeBtn.addEventListener('click', closeSidebar);
+        overlay.addEventListener('click', closeSidebar);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+        </script>
+        {{-- profile toggle ends here --}}
 
 
 
