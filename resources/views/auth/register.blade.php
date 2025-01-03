@@ -161,12 +161,7 @@
     <script async src="//onelinksmartscript.appsflyer.com/onelink-smart-script-latest.js" onload="onAppsFlyerLoad()">
     </script>
 
-    <script
-        src="https://recaptcha.net/recaptcha/api.js?render=6LeJDkwpAAAAAFUuiKS66HQe6Jz-Z-uPp5Dl6q5B&onload=onloadRecaptchaCallback">
-    </script>
-    <script type="text/javascript">
-        var AppCaptcha = {"captchaKey":"6LeJDkwpAAAAAFUuiKS66HQe6Jz-Z-uPp5Dl6q5B","isBotUrl":"https:\/\/pocketoption.com\/en\/api\/captcha\/is-bot\/"};
-    </script>
+
 
 </head>
 
@@ -673,35 +668,7 @@
     </div><!-- .wrapper -->
     <script src="themes/2017-09/js/registerPage.js?v=1734766668"></script>
 
-    <script>
-        window.recaptchaWidgets = {};
 
-    function onloadRecaptchaCallback() {
-        renderRecaptchaWidgets();
-    }
-
-    function renderRecaptchaWidgets() {
-        const recaptchaWidgets = document.querySelectorAll('.js-recaptcha-widget');
-        if (!recaptchaWidgets) {
-            return;
-        }
-
-        const params = {
-            sitekey : '6LcU2hgUAAAAAPHmrOrfTDy6DnROjq7Mr8LNwhNF',
-            theme : 'light'
-        };
-
-        recaptchaWidgets.forEach(function(recaptchaWidget) {
-            if (recaptchaWidget.dataset.callback) {
-                params['callback'] = recaptchaWidget.dataset.callback;
-            }
-            if (recaptchaWidget.dataset.hl) {
-                params['hl'] = recaptchaWidget.dataset.hl;
-            }
-            window.recaptchaWidgets[recaptchaWidget.dataset.name] = grecaptcha.render(recaptchaWidget, params);
-        });
-    }
-    </script>
 </body>
 
 </html>
